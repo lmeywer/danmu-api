@@ -715,7 +715,7 @@ export async function getBangumi(path) {
   }
   log("info", `Fetched details for anime ID: ${idParam}`);
 
-    log("info", `Found ${JSON.stringify(links)} animes with filtered episodes`);
+    log("info", `Found ${JSON.stringify(anime.links)} animes with filtered episodes`);
   // 构建 episodes 列表
   let episodesList = [];
   for (let i = 0; i < anime.links.length; i++) {

@@ -176,7 +176,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
         else if (source === "iqiyi") requestPromise = iqiyiSource.search(queryTitle);
         else if (source === "imgo") requestPromise = mangoSource.search(queryTitle);
         else if (source === "bilibili") requestPromise = bilibiliSource.search(queryTitle);
-        log("info", `单个`);
+
         globals.sourceOrderArr=[source];
         results = await requestPromise;
     }else{
@@ -197,18 +197,18 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
           if (source === "imgo") return mangoSource.search(queryTitle);
           if (source === "bilibili") return bilibiliSource.search(queryTitle);
         });
-    log("info", `多个`);
+
         // 执行所有请求并等待结果
         results = await Promise.all(requestPromises);
     }
     // 创建一个对象来存储返回的结果
     const resultData = {};
-log("info", `----------------${globals.sourceOrderArr.length}`);
+
     // 动态根据 sourceOrderArr 顺序将结果赋值给对应的来源
     globals.sourceOrderArr.forEach((source, index) => {
       resultData[source] = results[index];  // 根据顺序赋值
     });
-
+log("info", `++++++++++++++++++++`);
     // 解构出返回的结果
     const {
       vod: animesVodResults, 360: animes360, tmdb: animesTmdb, douban: animesDouban, renren: animesRenren,

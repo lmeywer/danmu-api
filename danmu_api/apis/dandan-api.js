@@ -160,7 +160,8 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
   }
 
   try {
-    let results;
+    
+    /*let results;
     if(source!=""){
         let requestPromise;
         if (source === "360") requestPromise = kan360Source.search(queryTitle);
@@ -179,7 +180,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
 
         globals.sourceOrderArr=[source];
         results = await requestPromise;
-    }else{
+    }else{*/
         // 根据 sourceOrderArr 动态构建请求数组
         log("info", `Search sourceOrderArr: ${globals.sourceOrderArr}`);
         const requestPromises = globals.sourceOrderArr.map(source => {
@@ -199,8 +200,8 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
         });
 
         // 执行所有请求并等待结果
-        results = await Promise.all(requestPromises);
-    }
+        const results = await Promise.all(requestPromises);
+    //}
     // 创建一个对象来存储返回的结果
     const resultData = {};
 
@@ -208,7 +209,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
     globals.sourceOrderArr.forEach((source, index) => {
       resultData[source] = results[index];  // 根据顺序赋值
     });
-log("info", `${JSON.stringify(resultData)}`);
+log("info", `${JSON.stringify(globals.sourceOrderArr)}`);
     // 解构出返回的结果
     const {
       vod: animesVodResults, 360: animes360, tmdb: animesTmdb, douban: animesDouban, renren: animesRenren,

@@ -772,7 +772,7 @@ export async function getBangumi(path) {
     ],
     episodes: episodesList,
   });
-log("info", `--------Found ${JSON.stringify(bangumi.episodes)} animes with filtered episodes`);
+log("info", `--------Found ${JSON.stringify(episodesList)} animes with filtered episodes`);
   return jsonResponse({
     errorCode: 0,
     success: true,

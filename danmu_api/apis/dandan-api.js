@@ -203,7 +203,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
     }
     // 创建一个对象来存储返回的结果
     const resultData = {};
-
+log("info", `${resultData}`);
     // 动态根据 sourceOrderArr 顺序将结果赋值给对应的来源
     globals.sourceOrderArr.forEach((source, index) => {
       resultData[source] = results[index];  // 根据顺序赋值
@@ -256,9 +256,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
         await youkuSource.handleAnimes(animesYouku, queryTitle, curAnimes);
       } else if (key === 'iqiyi') {
         // 等待处理iQiyi来源
-          log("info", `++++++++++++++++++++111`);
         await iqiyiSource.handleAnimes(animesIqiyi, queryTitle, curAnimes);
-          log("info", `++++++++++++++++++++`);
       } else if (key === 'imgo') {
         // 等待处理Mango来源
         await mangoSource.handleAnimes(animesImgo, queryTitle, curAnimes);

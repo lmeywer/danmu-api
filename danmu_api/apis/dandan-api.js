@@ -162,6 +162,8 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
   try {
     
     let results;
+    // 创建一个对象来存储返回的结果
+    const resultData = {};
     if(!source){
         // 根据 sourceOrderArr 动态构建请求数组
         log("info", `Search sourceOrderArr: ${globals.sourceOrderArr}`);
@@ -183,6 +185,9 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
 
         // 执行所有请求并等待结果
         results = await Promise.all(requestPromises);
+        globals.sourceOrderArr.forEach((source, index) => {
+          resultData[source] = results[index];  // 根据顺序赋值
+        });
     }else{
         let requestPromise;
         if (source === "360") requestPromise = kan360Source.search(queryTitle);
@@ -201,25 +206,9 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
 
         globals.sourceOrderArr=[source];
         results = await requestPromise;
+        resultData[source] = results[0];
     }
-    // 创建一个对象来存储返回的结果
-    const resultData = {};
-log("info", `${JSON.stringify(results)}`);
-    // 动态根据 sourceOrderArr 顺序将结果赋值给对应的来源
-    globals.sourceOrderArr.forEach((source1, index) => {
-      //resultData[source1] = results[index];  // 根据顺序赋值
-      const res = results[index];
-      // 如果返回的是对象，尝试取其中的 list 或 data 字段
-      if (Array.isArray(res)) {
-        resultData[source1] = res;
-      } else if (res && res.list) {
-        resultData[source1] = res.list;
-      } else if (res && res.data) {
-        resultData[source1] = res.data;
-      } else {
-        resultData[source1] = []; // 默认空数组
-      }
-    });
+
 log("info", `${JSON.stringify(resultData)}`);
     // 解构出返回的结果
     const {

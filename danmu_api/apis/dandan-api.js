@@ -196,7 +196,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
           if (source === "imgo") return mangoSource.search(queryTitle);
           if (source === "bilibili") return bilibiliSource.search(queryTitle);
         });
-    
+    log("info", `多个`);
         // 执行所有请求并等待结果
         results = await Promise.all(requestPromises);
     }

@@ -203,7 +203,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
     }
     // 创建一个对象来存储返回的结果
     const resultData = {};
-
+log("info", `----------------${globals.sourceOrderArr.length}`);
     // 动态根据 sourceOrderArr 顺序将结果赋值给对应的来源
     globals.sourceOrderArr.forEach((source, index) => {
       resultData[source] = results[index];  // 根据顺序赋值

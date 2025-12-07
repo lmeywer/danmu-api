@@ -76,7 +76,7 @@ function matchSeason(anime, queryTitle, season) {
 // Extracted function for GET /api/v2/search/anime
 export async function searchAnime(url, preferAnimeId = null, preferSource = null) {
   const queryTitle = url.searchParams.get("keyword");
-  const source = url.searchParams.get("from");
+  let source = url.searchParams.get("from");
   log("info", `Search anime with keyword: ${queryTitle}`);
 
   // 关键字为空直接返回，不用多余查询
@@ -162,25 +162,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
   try {
     
     let results;
-    if(source!=""){
-        let requestPromise;
-        if (source === "360") requestPromise = kan360Source.search(queryTitle);
-        else if (source === "vod") requestPromise = vodSource.search(queryTitle, preferAnimeId, preferSource);
-        else if (source === "tmdb") requestPromise = tmdbSource.search(queryTitle);
-        else if (source === "douban") requestPromise = doubanSource.search(queryTitle);
-        else if (source === "renren") requestPromise = renrenSource.search(queryTitle);
-        else if (source === "hanjutv") requestPromise = hanjutvSource.search(queryTitle);
-        else if (source === "bahamut") requestPromise = bahamutSource.search(queryTitle);
-        else if (source === "dandan") requestPromise = dandanSource.search(queryTitle);
-        else if (source === "tencent") requestPromise = tencentSource.search(queryTitle);
-        else if (source === "youku") requestPromise = youkuSource.search(queryTitle);
-        else if (source === "iqiyi") requestPromise = iqiyiSource.search(queryTitle);
-        else if (source === "imgo") requestPromise = mangoSource.search(queryTitle);
-        else if (source === "bilibili") requestPromise = bilibiliSource.search(queryTitle);
-log("info", `-----------------`);
-        globals.sourceOrderArr=[source];
-        results = await requestPromise;
-    }else{
+    if(!source){
         // 根据 sourceOrderArr 动态构建请求数组
         log("info", `Search sourceOrderArr: ${globals.sourceOrderArr}`);
         const requestPromises = globals.sourceOrderArr.map(source => {
@@ -201,6 +183,24 @@ log("info", `-----------------`);
 log("info", `++++++++++++++++++`);
         // 执行所有请求并等待结果
         results = await Promise.all(requestPromises);
+    }else{
+        let requestPromise;
+        if (source === "360") requestPromise = kan360Source.search(queryTitle);
+        else if (source === "vod") requestPromise = vodSource.search(queryTitle, preferAnimeId, preferSource);
+        else if (source === "tmdb") requestPromise = tmdbSource.search(queryTitle);
+        else if (source === "douban") requestPromise = doubanSource.search(queryTitle);
+        else if (source === "renren") requestPromise = renrenSource.search(queryTitle);
+        else if (source === "hanjutv") requestPromise = hanjutvSource.search(queryTitle);
+        else if (source === "bahamut") requestPromise = bahamutSource.search(queryTitle);
+        else if (source === "dandan") requestPromise = dandanSource.search(queryTitle);
+        else if (source === "tencent") requestPromise = tencentSource.search(queryTitle);
+        else if (source === "youku") requestPromise = youkuSource.search(queryTitle);
+        else if (source === "iqiyi") requestPromise = iqiyiSource.search(queryTitle);
+        else if (source === "imgo") requestPromise = mangoSource.search(queryTitle);
+        else if (source === "bilibili") requestPromise = bilibiliSource.search(queryTitle);
+log("info", `-----------------`);
+        globals.sourceOrderArr=[source];
+        results = await requestPromise;
     }
     // 创建一个对象来存储返回的结果
     const resultData = {};

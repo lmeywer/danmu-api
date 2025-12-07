@@ -177,6 +177,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
         else if (source === "imgo") requestPromise = mangoSource.search(queryTitle);
         else if (source === "bilibili") requestPromise = bilibiliSource.search(queryTitle);
         log("info", `单个`);
+        globals.sourceOrderArr=[source];
         results = await requestPromise;
     }else{
         // 根据 sourceOrderArr 动态构建请求数组

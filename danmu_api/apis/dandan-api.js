@@ -637,9 +637,6 @@ export async function searchEpisodes(url) {
     const bangumiUrl = new URL(`/bangumi/${animeItem.bangumiId}`, url.origin);
     const bangumiRes = await getBangumi(bangumiUrl.pathname);
     const bangumiData = await bangumiRes.json();
-
-log("info", `${JSON.stringify(bangumiData.bangumi.episodes)} `);
-
       
     if (bangumiData.success && bangumiData.bangumi && bangumiData.bangumi.episodes) {
       let filteredEpisodes = bangumiData.bangumi.episodes;
@@ -718,6 +715,7 @@ export async function getBangumi(path) {
   }
   log("info", `Fetched details for anime ID: ${idParam}`);
 
+    log("info", `Found ${JSON.stringify(links)} animes with filtered episodes`);
   // 构建 episodes 列表
   let episodesList = [];
   for (let i = 0; i < anime.links.length; i++) {

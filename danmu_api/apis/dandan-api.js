@@ -215,10 +215,9 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
       hanjutv: animesHanjutv, bahamut: animesBahamut, dandan: animesDandan, tencent: animesTencent, youku: animesYouku,
       iqiyi: animesIqiyi, imgo: animesImgo, bilibili: animesBilibili
     } = resultData;
-log("info", `++++++++++++++++++++`);
+
     // 按顺序处理每个来源的结果
     for (const key of globals.sourceOrderArr) {
-        log("info", `---------------------`);
       if (key === '360') {
         // 等待处理360来源
         await kan360Source.handleAnimes(animes360, queryTitle, curAnimes);
@@ -269,9 +268,9 @@ log("info", `++++++++++++++++++++`);
   } catch (error) {
     log("error", "发生错误:", error);
   }
-
+log("info", `++++++++++++++++++++1`);
   storeAnimeIdsToMap(curAnimes, queryTitle);
-
+log("info", `++++++++++++++++++++2`);
   // 如果启用了集标题过滤，则为每个动漫添加过滤后的 episodes
   if (globals.enableEpisodeFilter) {
     const validAnimes = [];
@@ -308,7 +307,7 @@ log("info", `++++++++++++++++++++`);
     curAnimes.length = 0;
     curAnimes.push(...validAnimes);
   }
-
+log("info", `++++++++++++++++++++3`);
   // 如果有新的anime获取到，则更新本地缓存
   if (globals.localCacheValid && curAnimes.length !== 0) {
     await updateLocalCaches();

@@ -177,7 +177,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
         else if (source === "iqiyi") requestPromise = iqiyiSource.search(queryTitle);
         else if (source === "imgo") requestPromise = mangoSource.search(queryTitle);
         else if (source === "bilibili") requestPromise = bilibiliSource.search(queryTitle);
-
+log("info", `-----------------`);
         globals.sourceOrderArr=[source];
         results = await requestPromise;
     }else{
@@ -198,7 +198,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
           if (source === "imgo") return mangoSource.search(queryTitle);
           if (source === "bilibili") return bilibiliSource.search(queryTitle);
         });
-
+log("info", `++++++++++++++++++`);
         // 执行所有请求并等待结果
         results = await Promise.all(requestPromises);
     }

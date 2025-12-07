@@ -180,7 +180,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
           if (source === "imgo") return mangoSource.search(queryTitle);
           if (source === "bilibili") return bilibiliSource.search(queryTitle);
         });
-log("info", `++++++++++++++++++`);
+
         // 执行所有请求并等待结果
         results = await Promise.all(requestPromises);
     }else{
@@ -198,13 +198,13 @@ log("info", `++++++++++++++++++`);
         else if (source === "iqiyi") requestPromise = iqiyiSource.search(queryTitle);
         else if (source === "imgo") requestPromise = mangoSource.search(queryTitle);
         else if (source === "bilibili") requestPromise = bilibiliSource.search(queryTitle);
-log("info", `-----------------`);
+
         globals.sourceOrderArr=[source];
         results = await requestPromise;
     }
     // 创建一个对象来存储返回的结果
     const resultData = {};
-
+log("info", `${JSON.stringify(results)}`);
     // 动态根据 sourceOrderArr 顺序将结果赋值给对应的来源
     globals.sourceOrderArr.forEach((source, index) => {
       resultData[source] = results[index];  // 根据顺序赋值

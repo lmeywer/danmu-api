@@ -207,7 +207,18 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
 log("info", `${JSON.stringify(results)}`);
     // 动态根据 sourceOrderArr 顺序将结果赋值给对应的来源
     globals.sourceOrderArr.forEach((source1, index) => {
-      resultData[source1] = results[index];  // 根据顺序赋值
+      //resultData[source1] = results[index];  // 根据顺序赋值
+      const res = results[index];
+      // 如果返回的是对象，尝试取其中的 list 或 data 字段
+      if (Array.isArray(res)) {
+        resultData[source1] = res;
+      } else if (res && res.list) {
+        resultData[source1] = res.list;
+      } else if (res && res.data) {
+        resultData[source1] = res.data;
+      } else {
+        resultData[source1] = []; // 默认空数组
+      }
     });
 log("info", `${JSON.stringify(resultData)}`);
     // 解构出返回的结果

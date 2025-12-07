@@ -206,7 +206,7 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
 
         globals.sourceOrderArr=[source];
         results = await requestPromise;
-        resultData[source] = results[0];
+        resultData[source] = results;
     }
 
 log("info", `${JSON.stringify(resultData)}`);

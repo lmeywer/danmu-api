@@ -743,14 +743,14 @@ export async function getBangumi(path) {
         404
       );
     }
-log("info", `---------------------Found ${JSON.stringify(episodesList)} animes with filtered episodes`);
+
     // 重新排序episodeNumber
     episodesList = episodesList.map((episode, index) => ({
       ...episode,
       episodeNumber: `${index+1}`
     }));
   }
-log("info", `+++++++++++++++++Found ${JSON.stringify(episodesList)} animes with filtered episodes`);
+
   const bangumi = Bangumi.fromJson({
     animeId: anime.animeId,
     bangumiId: anime.bangumiId,
@@ -772,7 +772,7 @@ log("info", `+++++++++++++++++Found ${JSON.stringify(episodesList)} animes with 
     ],
     episodes: episodesList,
   });
-
+log("info", `--------Found ${JSON.stringify(bangumi.episodes)} animes with filtered episodes`);
   return jsonResponse({
     errorCode: 0,
     success: true,

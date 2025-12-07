@@ -715,7 +715,6 @@ export async function getBangumi(path) {
   }
   log("info", `Fetched details for anime ID: ${idParam}`);
 
-    log("info", `Found ${JSON.stringify(anime.links)} animes with filtered episodes`);
   // 构建 episodes 列表
   let episodesList = [];
   for (let i = 0; i < anime.links.length; i++) {
@@ -753,7 +752,7 @@ export async function getBangumi(path) {
       episodeNumber: `${index+1}`
     }));
   }
-
+log("info", `Found ${JSON.stringify(episodesList)} animes with filtered episodes`);
   const bangumi = Bangumi.fromJson({
     animeId: anime.animeId,
     bangumiId: anime.bangumiId,

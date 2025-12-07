@@ -672,15 +672,14 @@ export async function searchEpisodes(url) {
           episodes: filteredEpisodes.map(ep => ({
             episodeId: ep.episodeId,
             episodeTitle: ep.episodeTitle,
-            episodeUrl: ep.episodeUrl,
-              svfs:1
+            episodeUrl: ep.episodeUrl
           }))
         }));
       }
     }
   }
 
-  log("info", `Found ${resultAnimes[0].episodes[0]} animes with filtered episodes`);
+  log("info", `Found ${JSON.stringify(resultAnimes[0].episodes[0])} animes with filtered episodes`);
 
   return jsonResponse({
     errorCode: 0,

@@ -680,7 +680,7 @@ export async function searchEpisodes(url) {
     }
   }
 
-  log("info", `Found ${resultAnimes.episodes} animes with filtered episodes`);
+  log("info", `Found ${resultAnimes[0].episodes} animes with filtered episodes`);
 
   return jsonResponse({
     errorCode: 0,

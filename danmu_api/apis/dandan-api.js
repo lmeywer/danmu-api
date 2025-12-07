@@ -638,6 +638,9 @@ export async function searchEpisodes(url) {
     const bangumiRes = await getBangumi(bangumiUrl.pathname);
     const bangumiData = await bangumiRes.json();
 
+log("info", `${JSON.stringify(bangumiData.bangumi.episodes)} `);
+
+      
     if (bangumiData.success && bangumiData.bangumi && bangumiData.bangumi.episodes) {
       let filteredEpisodes = bangumiData.bangumi.episodes;
 

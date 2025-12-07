@@ -273,7 +273,7 @@ log("info", `${JSON.stringify(resultData)}`);
 
   storeAnimeIdsToMap(curAnimes, queryTitle);
     log("info", `--------------------`);
-log("info", `${JSON.stringify(animesIqiyi)}`);
+log("info", `${JSON.stringify(curAnimes)}`);
   // 如果启用了集标题过滤，则为每个动漫添加过滤后的 episodes
   if (globals.enableEpisodeFilter) {
     const validAnimes = [];
